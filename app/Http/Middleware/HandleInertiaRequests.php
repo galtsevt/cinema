@@ -2,6 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Facades\Breadcrumbs;
+use App\Facades\MetaData;
+use App\Http\Resources\Seo\BreadcrumbResource;
+use Galtsevt\LaravelSeo\App\Facades\Seo;
+use Galtsevt\LaravelSeo\App\Resources\BreadcrumbItemResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -39,6 +44,10 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'seo' => [
+                'title' => fn() => MetaData::getTitle(),
+                'breadcrumbs' => fn() => BreadcrumbResource::collection(Breadcrumbs::getAll()),
+            ],
         ]);
     }
 }

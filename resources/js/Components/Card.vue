@@ -9,7 +9,10 @@
         <div class="p-2 sm:px-4 sm:py-5">
             <slot/>
         </div>
-        <slot name="footer"/>
+        <div v-if="$slots.footer"
+             class="p-2 px-4 text-gray-500 border-t border-gray-200 rounded-b-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
+            <slot name="footer"/>
+        </div>
     </div>
 </template>
 
